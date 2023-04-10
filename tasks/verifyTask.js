@@ -13,7 +13,7 @@ task("verify-etherscan", "Verify deployed contract on Etherscan")
     try {
       await hre.run("verify:verify", {
         address: taskArgs.contractaddress,
-        contract: "contracts/vesting.sol:Vesting", // <path-to-contract>:<contract-name>
+        contract: "contracts/vesting.sol:Vesting",
         constructorArguments: [taskArgs.tokenvalue],
       });
     } catch ({ message }) {

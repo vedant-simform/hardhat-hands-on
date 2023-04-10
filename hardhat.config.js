@@ -20,7 +20,7 @@ module.exports = {
     apiKey: "8FZG3HTQH2JJTWUM4Z1D6ZXI3SC36TD867",
   },
   gasReporter: {
-    enabled: true,
+    enabled: false,
     currency: "USD",
     gasPrice: 21,
     coinmarketcap: COINMARKETCAP_API,
