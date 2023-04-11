@@ -12,15 +12,15 @@ module.exports = {
   networks: {
     hardhat: {},
     polygon_mumbai: {
-      url: "https://polygon-mumbai.g.alchemy.com/v2/Z3uUYm-JtLrkeOtAWIYHLzENe3tRyj5k",
+      url: "https://polygon-mumbai.g.alchemy.com/v2/"`${process.env.ALCHEMY_API}`,
       accounts: [`${process.env.POLYGON_PRIVATE_KEY}`],
     },
   },
   etherscan: {
-    apiKey: "8FZG3HTQH2JJTWUM4Z1D6ZXI3SC36TD867",
+    apiKey: `${process.env.ALCHEMY_API}`,
   },
   gasReporter: {
-    enabled: false,
+    enabled: true,
     currency: "USD",
     gasPrice: 21,
     coinmarketcap: COINMARKETCAP_API,
