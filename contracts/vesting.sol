@@ -52,6 +52,7 @@ contract Vesting {
         });
        
         require(totalTokens>0,"Add some tokens");
+        require(vestingPeriod>=slicePeriod,"Slice Period must be less than Vesting period");
         vestingSchedules[benificiary][totalVesting[benificiary]]._token.transferFrom(benificiary,address(this),totalTokens);
         totalVesting[benificiary]++;
         emit DepositTokens(benificiary,address(this),totalTokens);
@@ -71,7 +72,7 @@ contract Vesting {
         VestingSchedule storage schedule = vestingSchedules[benificiary][vestingID];
 
         require(schedule._startTime+schedule._slicePeriod <= block.timestamp,"No Token vested yet");
-        
+        require(schedule._releasedTokens<schedule._totalTokens,"All Tokens are released");
         uint256 intervals = (schedule._vestingPeriod) / (schedule._slicePeriod);
         uint256 tokensInInterval = schedule._totalTokens /intervals;
 
