@@ -58,7 +58,7 @@ describe("Test-cases for Vesting", () => {
         )
       ).to.revertedWith("Slice Period must be less than Vesting period");
     });
-    it("Event emission of DepositTokens", async () => {
+    it("Event emission of TokenDeposited", async () => {
       const { deployedVest, deployToken } = await loadFixture(
         deploymentOfContract
       );
@@ -75,7 +75,7 @@ describe("Test-cases for Vesting", () => {
           0
         )
       )
-        .to.emit(deployedVest, "DepositTokens")
+        .to.emit(deployedVest, "TokenDeposited")
         .withArgs(owner.address, deployedVest.address, 10);
     });
 
@@ -288,7 +288,7 @@ describe("Test-cases for Vesting", () => {
         )
       );
     });
-    it("Event Emission for WithdrawTokens", async () => {
+    it("Event Emission for WithdrewTokens", async () => {
       const { deployedVest, deployToken } = await loadFixture(
         deploymentOfContract
       );
@@ -304,7 +304,7 @@ describe("Test-cases for Vesting", () => {
       );
       await deployedVest.releaseTokens(acc1.address, 0);
       await expect(deployedVest.connect(acc1).withdraw(acc1.address, 100, 0))
-        .to.emit(deployedVest, "WithdrawTokens")
+        .to.emit(deployedVest, "WithdrewTokens")
         .withArgs(acc1.address, 100);
     });
   });

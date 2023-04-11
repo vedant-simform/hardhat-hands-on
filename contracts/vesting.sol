@@ -8,9 +8,9 @@ contract Vesting {
     mapping(address=>mapping(uint256=> uint256)) public withdrawableAmount;
     mapping(address => mapping(uint256=> VestingSchedule)) public vestingSchedules;
 
-    event DepositTokens(address _from,address _to,uint256 totalTokens);
+    event TokenDeposited(address _from,address _to,uint256 totalTokens);
     event VestedTokens(address _benificiary,uint256 vestedTopkens);
-    event WithdrawTokens(address _to,uint256 amount);
+    event WithdrewTokens(address _to,uint256 amount);
 
     mapping(address=>uint256) totalVesting;
 
@@ -55,7 +55,7 @@ contract Vesting {
         require(vestingPeriod>=slicePeriod,"Slice Period must be less than Vesting period");
         vestingSchedules[benificiary][totalVesting[benificiary]]._token.transferFrom(benificiary,address(this),totalTokens);
         totalVesting[benificiary]++;
-        emit DepositTokens(benificiary,address(this),totalTokens);
+        emit TokenDeposited(benificiary,address(this),totalTokens);
 
     } 
 
@@ -101,6 +101,6 @@ contract Vesting {
         require(withdrawableAmount[benificiary][vestingID]>0,"No amount to be withdrawn");
         withdrawableAmount[benificiary][vestingID]-=withdrawAmount;        
         vestingSchedules[benificiary][vestingID]._token.transfer(benificiary,withdrawAmount);     
-        emit WithdrawTokens(benificiary,withdrawAmount);
+        emit WithdrewTokens(benificiary,withdrawAmount);
     }
 }
